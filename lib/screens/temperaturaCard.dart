@@ -133,7 +133,7 @@ class _TemperaturaCardState extends State<TemperaturaCard>
                     ),
                     SizedBox(height: 8.0),
                     Text(
-                      'Última verificação: ${_dataHora.toString()}',
+                      'Última verificação: $dataHora',
                       style: TextStyle(fontSize: 16),
                     ),
                   ],
