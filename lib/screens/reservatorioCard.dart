@@ -1,3 +1,5 @@
+import 'package:esol/screens/exibirGraficoReservatorio.dart';
+import 'package:esol/screens/reservoirLevelScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -82,139 +84,149 @@ class _ReservatorioCardState extends State<ReservatorioCard>
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: AnimatedBuilder(
-        animation: _animationController,
-        builder: (BuildContext context, Widget? child) {
-          return Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 70,
-                      height: 70,
-                      child: Center(
-                        child: SizedBox(
-                          width: 90,
-                          height: 90,
-                          child: SfRadialGauge(
-                            enableLoadingAnimation: true,
-                            axes: <RadialAxis>[
-                              RadialAxis(
-                                  showLabels: false,
-                                  showTicks: false,
-                                  radiusFactor: 0.8,
-                                  maximum: 100,
-                                  axisLineStyle: const AxisLineStyle(
-                                      cornerStyle: CornerStyle.startCurve,
-                                      thickness: 1),
-                                  annotations: <GaugeAnnotation>[
-                                    GaugeAnnotation(
-                                        angle: 90,
-                                        widget: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [],
-                                            ),
-                                          ],
-                                        )),
-                                    const GaugeAnnotation(
-                                      angle: 124,
-                                      positionFactor: 1.1,
-                                      widget: Text('0',
-                                          style: TextStyle(fontSize: 8)),
-                                    ),
-                                    const GaugeAnnotation(
-                                      angle: 60,
-                                      positionFactor: 1.1,
-                                      widget: Text("100",
-                                          style: TextStyle(fontSize: 8)),
-                                    ),
-                                  ],
-                                  pointers: <GaugePointer>[
-                                    NeedlePointer(
-                                      enableAnimation: true,
-                                      gradient: const LinearGradient(
-                                          colors: <Color>[
-                                            Color.fromARGB(0, 231, 170, 0),
-                                            Color.fromARGB(255, 16, 9, 17)
-                                          ],
-                                          stops: <double>[
-                                            0.25,
-                                            0.75
-                                          ],
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter),
-                                      animationType: AnimationType.easeOutBack,
-                                      value: _nivel,
-                                      animationDuration: 1300,
-                                      needleStartWidth: 1,
-                                      needleEndWidth: 8,
-                                      needleLength: 0.9,
-                                      knobStyle: const KnobStyle(
-                                        knobRadius: 0,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ReservoirLevelScreen(),
+          ),
+        );
+      },
+      child: Card(
+        child: AnimatedBuilder(
+          animation: _animationController,
+          builder: (BuildContext context, Widget? child) {
+            return Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 70,
+                        height: 70,
+                        child: Center(
+                          child: SizedBox(
+                            width: 90,
+                            height: 90,
+                            child: SfRadialGauge(
+                              enableLoadingAnimation: true,
+                              axes: <RadialAxis>[
+                                RadialAxis(
+                                    showLabels: false,
+                                    showTicks: false,
+                                    radiusFactor: 0.8,
+                                    maximum: 100,
+                                    axisLineStyle: const AxisLineStyle(
+                                        cornerStyle: CornerStyle.startCurve,
+                                        thickness: 1),
+                                    annotations: <GaugeAnnotation>[
+                                      GaugeAnnotation(
+                                          angle: 90,
+                                          widget: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [],
+                                              ),
+                                            ],
+                                          )),
+                                      const GaugeAnnotation(
+                                        angle: 124,
+                                        positionFactor: 1.1,
+                                        widget: Text('0',
+                                            style: TextStyle(fontSize: 8)),
                                       ),
-                                    ),
-                                    RangePointer(
-                                      value: _nivel,
-                                      width: 5,
-                                      pointerOffset: -1,
-                                      cornerStyle: CornerStyle.bothCurve,
-                                      color: Color.fromARGB(255, 160, 4, 19),
-                                      gradient: const SweepGradient(
-                                          colors: <Color>[
-                                            Color.fromARGB(255, 219, 147, 38),
-                                            Color.fromARGB(255, 15, 170, 67)
-                                          ],
-                                          stops: <double>[
-                                            0.25,
-                                            0.75
-                                          ]),
-                                    ),
-                                    MarkerPointer(
-                                      value: _nivel,
-                                      color: Colors.white,
-                                      markerType: MarkerType.circle,
-                                    ),
-                                  ]),
-                            ],
+                                      const GaugeAnnotation(
+                                        angle: 60,
+                                        positionFactor: 1.1,
+                                        widget: Text("100",
+                                            style: TextStyle(fontSize: 8)),
+                                      ),
+                                    ],
+                                    pointers: <GaugePointer>[
+                                      NeedlePointer(
+                                        enableAnimation: true,
+                                        gradient: const LinearGradient(
+                                            colors: <Color>[
+                                              Color.fromARGB(0, 231, 170, 0),
+                                              Color.fromARGB(255, 16, 9, 17)
+                                            ],
+                                            stops: <double>[
+                                              0.25,
+                                              0.75
+                                            ],
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter),
+                                        animationType:
+                                            AnimationType.easeOutBack,
+                                        value: _nivel,
+                                        animationDuration: 1300,
+                                        needleStartWidth: 1,
+                                        needleEndWidth: 8,
+                                        needleLength: 0.9,
+                                        knobStyle: const KnobStyle(
+                                          knobRadius: 0,
+                                        ),
+                                      ),
+                                      RangePointer(
+                                        value: _nivel,
+                                        width: 5,
+                                        pointerOffset: -1,
+                                        cornerStyle: CornerStyle.bothCurve,
+                                        color: Color.fromARGB(255, 160, 4, 19),
+                                        gradient: const SweepGradient(
+                                            colors: <Color>[
+                                              Color.fromARGB(255, 219, 147, 38),
+                                              Color.fromARGB(255, 15, 170, 67)
+                                            ],
+                                            stops: <double>[
+                                              0.25,
+                                              0.75
+                                            ]),
+                                      ),
+                                      MarkerPointer(
+                                        value: _nivel,
+                                        color: Colors.white,
+                                        markerType: MarkerType.circle,
+                                      ),
+                                    ]),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(width: 16.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _nome,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Nível: $_nivel%',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Última verificação: $dataHora',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
+                      SizedBox(width: 16.0),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _nome,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            'Nível: $_nivel%',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            'Última verificação: $dataHora',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

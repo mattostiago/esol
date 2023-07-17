@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:esol/screens/reservoirLevelScreen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'package:esol/utils/propriedades.dart';
@@ -28,7 +29,11 @@ class Storage {
 
     try {
       // Starting Web Call with data.
-      var response = await http.post(url, body: json.encode(data));
+      var response = await http.post(
+        url,
+        body: json.encode(data),
+        headers: {'Cache-Control': 'no-cache'},
+      );
       print(response.request);
 
       // Getting Server response into variable.
@@ -64,7 +69,11 @@ class Storage {
 
     try {
       // Starting Web Call with data.
-      var response = await http.post(url, body: json.encode(data));
+      var response = await http.post(
+        url,
+        body: json.encode(data),
+        headers: {'Cache-Control': 'no-cache'},
+      );
       print(response.request);
 
       // Getting Server response into variable.
@@ -98,7 +107,11 @@ class Storage {
 
     try {
       // Starting Web Call with data.
-      var response = await http.post(url, body: json.encode(data));
+      var response = await http.post(
+        url,
+        body: json.encode(data),
+        headers: {'Cache-Control': 'no-cache'},
+      );
       print(response.request);
 
       // Getting Server response into variable.
@@ -138,7 +151,11 @@ class Storage {
 
     try {
       // Starting Web Call with data.
-      var response = await http.post(url, body: json.encode(data));
+      var response = await http.post(
+        url,
+        body: json.encode(data),
+        headers: {'Cache-Control': 'no-cache'},
+      );
 
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
@@ -177,7 +194,11 @@ class Storage {
 
     try {
       // Starting Web Call with data.
-      var response = await http.post(url, body: json.encode(data));
+      var response = await http.post(
+        url,
+        body: json.encode(data),
+        headers: {'Cache-Control': 'no-cache'},
+      );
 
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
@@ -209,7 +230,11 @@ class Storage {
     print(data);
 
     // Starting Web Call with data.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(
+      url,
+      body: json.encode(data),
+      headers: {'Cache-Control': 'no-cache'},
+    );
     print(response.request);
     print(response.body);
     print(response.headers);
@@ -238,7 +263,11 @@ class Storage {
     print(data);
 
     // Starting Web Call with data.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(
+      url,
+      body: json.encode(data),
+      headers: {'Cache-Control': 'no-cache'},
+    );
     print(response.request);
     print(response.body);
     print(response.headers);
@@ -262,8 +291,33 @@ class Storage {
       path: '/apiEsol/pegarNivelRecenteReservatorio.php',
       // fragment: 'numbers');
     );
-    final response = await http.get(url);
+    final response = await http.get(
+      url,
+      headers: {'Cache-Control': 'no-cache'},
+    );
     return response.body;
+  }
+
+  Future<List<DataPoint>> pegarListaNivelRecente() async {
+    List<DataPoint> dataPoints = [];
+    const url = 'https://tinex.app/esol/apiEsol/nivelNoUltimoDia.php';
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Cache-Control': 'no-cache'}, // Desabilitar o cache
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      List<DataPoint> newDataPoints = data
+          .map((item) =>
+              DataPoint(int.parse(item['nivel']), int.parse(item['dataHora'])))
+          .toList();
+
+      dataPoints =
+          newDataPoints.reversed.toList(); // Inverter a ordem dos dados
+    } else {
+      throw Exception('Falha ao carregar os dados');
+    }
+    return dataPoints;
   }
 
   Future lerStatusAtualNivelTanque(String reservatorio) async {
@@ -279,7 +333,11 @@ class Storage {
     print(data);
 
     // Starting Web Call with data.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(
+      url,
+      body: json.encode(data),
+      headers: {'Cache-Control': 'no-cache'},
+    );
     print(response.request);
     print(response.body);
     print(response.headers);
@@ -308,7 +366,11 @@ class Storage {
     print(data);
 
     // Starting Web Call with data.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await http.post(
+      url,
+      body: json.encode(data),
+      headers: {'Cache-Control': 'no-cache'},
+    );
     print(response.request);
     print(response.body);
     print(response.headers);

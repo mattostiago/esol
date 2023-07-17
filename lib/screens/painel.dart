@@ -16,21 +16,46 @@ class Painel extends StatefulWidget {
 }
 
 class _PainelState extends State<Painel> {
-  Storage storage = Storage();
-  NivelRecenteReservatorio nivel = NivelRecenteReservatorio();
+  bool _isUpdating = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MenuDrawer(),
-      appBar: AppBar(title: const Text("Painel de monitoramento")),
-      body: Column(
-        children: [
-          ReservatorioCard(reservatorio: "1"),
-          GeradorCard(gerador: '1'),
-          AquecedorCard(aquecedor: "1"),
-          TemperaturaCard(reservatorio: '1'),
+      appBar: AppBar(
+        title: const Text("Painel de monitoramento"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _isUpdating ? _isUpdating = false : _isUpdating = true;
+              });
+            },
+            icon: Icon(Icons.update),
+          ),
         ],
       ),
+      body: _isUpdating
+          ? atualizaCards()
+          : Column(
+              children: [
+                ReservatorioCard(reservatorio: "1"),
+                GeradorCard(gerador: '1'),
+                AquecedorCard(aquecedor: "1"),
+                TemperaturaCard(reservatorio: '1'),
+              ],
+            ),
+    );
+  }
+
+  Widget atualizaCards() {
+    return Column(
+      children: [
+        ReservatorioCard(reservatorio: "1"),
+        GeradorCard(gerador: '1'),
+        AquecedorCard(aquecedor: "1"),
+        TemperaturaCard(reservatorio: '1'),
+      ],
     );
   }
 }

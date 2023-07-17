@@ -89,58 +89,61 @@ class _TemperaturaCardState extends State<TemperaturaCard>
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (BuildContext context, Widget? child) {
-                    return Icon(
-                      Icons.thermostat,
-                      size: 70,
-                      color: double.parse(_temperatura) > 25
-                          ? _animationHot.value
-                          : _animation.value,
-                    );
-                  },
-                ),
-                SizedBox(width: 16.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _nome,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    /*
-                    SizedBox(height: 8.0),
-                    Text(
-                      'Capacidade: $_capacidade' + 'L.',
-                      style: const TextStyle(fontSize: 16),
-                    ),*/
-                    SizedBox(height: 8.0),
-                    Text(
-                      'Temperatura: $_temperatura°C.',
-                      style: const TextStyle(
-                        fontSize: 16,
+    return InkWell(
+      onTap: () {},
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  AnimatedBuilder(
+                    animation: _animationController,
+                    builder: (BuildContext context, Widget? child) {
+                      return Icon(
+                        Icons.thermostat,
+                        size: 70,
+                        color: double.parse(_temperatura) > 25
+                            ? _animationHot.value
+                            : _animation.value,
+                      );
+                    },
+                  ),
+                  SizedBox(width: 16.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _nome,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      'Última verificação: $dataHora',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                      /*
+                      SizedBox(height: 8.0),
+                      Text(
+                        'Capacidade: $_capacidade' + 'L.',
+                        style: const TextStyle(fontSize: 16),
+                      ),*/
+                      SizedBox(height: 8.0),
+                      Text(
+                        'Temperatura: $_temperatura°C.',
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(
+                        'Última verificação: $dataHora',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
